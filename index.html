@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Euphoria</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- MENU LATERAL -->
+  <header>
+    <img src="imagens/Logo Pap.png" alt="Logo Euphoria" class="logo-img" />
+    <div class="logo">Euphoria</div>
+    <nav>
+      <ul>
+       <li>
+  <a href="#" data-target="inicio" style="display: flex; align-items: center; gap: 8px;">
+    <img src="imagens/verde.png" alt="Instagram" style="width: 30px; height: auto;">
+    Início
+  </a>
+</li>
+        <li>
+  <a href="#" data-target="campanha" style="display: flex; align-items: center; gap: 8px;">
+    <img src="imagens/vermelho.png" alt="Campanhas" style="width: 30px; height: auto;">
+    Campanhas
+  </a>
+</li>
+
+<li>
+  <a href="#" data-target="fichas" style="display: flex; align-items: center; gap: 8px;">
+    <img src="imagens/azul.png" alt="Fichas" style="width: 30px; height: auto;">
+    Fichas
+  </a>
+</li>
+
+<li>
+  <a href="#" data-target="login" style="display: flex; align-items: center; gap: 8px;">
+    <img src="imagens/amarelo.png" alt="Login" style="width: 30px; height: auto;">
+    Login
+  </a>
+</li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+
+    <!-- INÍCIO -->
+    <section id="inicio" class="conteudo">
+  <div class="inicio-header">
+    <div class="texto-inicio">
+      <h1>Bem Vindo ao site <span class="highlight">Euphoria</span></h1>
+      <p class="subtitulo">
+        Gerencie suas campanhas, personagens e dados de RPG com facilidade, estilo e total liberdade.
+      </p>
+      <button class="btn-centralizado" onclick="document.querySelector('a[data-target=login]').click()">Começar Agora</button>
+    </div>
+  </div>
+
+  <article class="descricao-inicio">
+    <h2>O que é o Euphoria?</h2>
+    <p>O <strong>Euphoria</strong> é a sua plataforma definitiva para viver e registrar aventuras incríveis de RPG. Aqui você pode:</p>
+    <ul>
+      <li>Criar e organizar campanhas personalizadas com facilidade</li>
+      <li>Armazenar fichas de personagens em Excel ou CSV, tudo organizado</li>
+      <li>Acessar tudo com segurança e praticidade, onde estiver</li>
+    </ul>
+    <p>Seja você um jogador casual ou um mestre experiente, o Euphoria foi feito para transformar suas histórias em experiências épicas. Comece agora e mergulhe nesse universo!</p>
+  </article>
+
+  <div class="redes-sociais">
+   <a href="https://www.instagram.com/euphoria_mdl/" target="_blank" aria-label="Instagram">
+  <img src="imagens/Instagram logo.png" alt="Instagram" style="width: 64px; height: auto; display: block; margin: 0 auto;" />
+  </a>
+  <a href="https://discord.gg/U3FBTr5J9G" target="_blank" aria-label="Discord">
+  <img src="imagens/discord logo.png" alt="Discord" style="width: 48px; height: auto; display: block; margin: 0 auto;" />
+  </a>
+
+  </div>
+</section>
+
+    <!-- CAMPANHA -->
+    <section id="campanha" class="conteudo" style="display: none;">
+      <h2>Criar Nova Campanha</h2>
+
+      <form id="formCampanha">
+        <div class="form-group">
+          <label for="nome">Nome da Campanha:</label>
+          <input type="text" id="nome" name="nome" required />
+        </div>
+
+        <div class="form-group">
+          <label for="imagem" class="upload-label">Imagem da Campanha </label>
+          <input type="file" id="imagem" name="imagem" accept="image/*" hidden />
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" name="descricao" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-centralizado">Criar Campanha</button>
+      </form>
+
+      <div id="campanhasContainer"></div>
+
+      <template id="templateCampanha">
+        <div class="preview-campanha">
+          <div class="card-campanha">
+            <div class="imagem-container">
+              <img src="" alt="Imagem da Campanha" />
+              <h3 class="nome-sobre-imagem"></h3>
+            </div>
+            <div class="descricao-campanha"></div>
+            <div class="nome-ficha"></div>
+            <div class="botoes-campanha">
+              <button class="btn-remover">Remover</button>
+              <button class="btn-editar">Editar</button>
+              <button class="btn-visualizar">Visualizar</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <section id="editarCampanha" class="conteudo" style="display:none;">
+        <h2>Editar Campanha</h2>
+        <form id="formEditarCampanha">
+          <div class="form-group">
+            <label for="editNome">Nome da Campanha:</label>
+            <input type="text" id="editNome" name="editNome" required />
+          </div>
+
+          <div class="form-group">
+            <label for="editImagem" class="upload-label">Imagem da Campanha (Selecionar nova imagem)</label>
+            <input type="file" id="editImagem" name="editImagem" accept="image/*" hidden />
+            <img id="editImagemPreview" alt="Prévia da imagem" />
+          </div>
+
+          <div class="form-group">
+            <label for="editDescricao">Descrição:</label>
+            <textarea id="editDescricao" name="editDescricao" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-centralizado">Salvar Alterações</button>
+          <button type="button" id="cancelarEditar" class="btn-centralizado">Cancelar</button>
+        </form>
+      </section>
+    </section>
+
+    <!-- FICHAS -->
+    <section id="fichas" class="conteudo" style="display: none;">
+  <h2 class="titulo-fichas">Upload de Fichas</h2>
+
+  <form id="formFicha" class="form-fichas">
+    <div class="form-group">
+      <label for="nomeFicha">Nome da ficha</label>
+      <input type="text" id="nomeFicha" placeholder="Nome da ficha" required />
+    </div>
+
+    <div class="form-group">
+      <label for="arquivoFicha" class="upload-label">Upload de Fichas</label>
+      <input type="file" id="arquivoFicha" accept=".xlsx,.xls,.csv" hidden required />
+      <div id="previewFichaSelecionada"></div>
+    </div>
+
+    <button type="submit" class="btn-centralizado">Enviar Ficha</button>
+  </form>
+
+  <div class="lista-fichas" id="listaFichas"></div>
+</section>
+
+
+    <!-- LOGIN -->
+    <section id="login" class="conteudo" style="display: none;">
+      <h2>Login</h2>
+      <form id="loginForm" class="form-login">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" placeholder="********" required />
+        </div>
+
+        <button type="submit" class="btn-centralizado">Entrar</button>
+      </form>
+
+      <p class="cadastro-msg">
+        Não tem uma conta? <a class="link1" href="#" id="linkCadastro">Cadastre-se aqui</a>
+      </p>
+    </section>
+
+    <!-- CADASTRO -->
+    <section id="cadastro" class="conteudo" style="display: none;">
+      <h2>Cadastro</h2>
+      <form id="formCadastro">
+        <div class="form-group">
+          <label for="cadastroNome">Nome de Usuário:</label>
+          <input type="text" id="cadastroNome" required />
+        </div>
+        <div class="form-group">
+          <label for="cadastroEmail">Email:</label>
+          <input type="email" id="cadastroEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="cadastroSenha">Senha:</label>
+          <input type="password" id="cadastroSenha" required />
+        </div>
+        <button type="submit" class="btn-centralizado">Cadastrar</button>
+        <p class="cadastro-msg">
+          Já tem uma conta? <a class="link1" href="#" id="linkLogin">Fazer login</a>
+        </p>
+      </form>
+    </section>
+
+
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
